@@ -1,5 +1,5 @@
 "use client"
-import { ICoinDetails, getCoinDetails } from "@/services/get-coin";
+import { ICoinDetails, useCoinDetails } from "@/services/get-coin";
 import Image from "next/image";
 import { formatCurrency, formatPercentage } from "@/lib/utils";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -16,7 +16,7 @@ import Link from "next/link";
 import Chart from "./chart";
 
 export default function Details({ initialData }: { initialData: ICoinDetails }) {
-    const { data: coinDetails, isLoading, isError } = getCoinDetails(initialData.id, initialData);
+    const { data: coinDetails, isLoading, isError } = useCoinDetails(initialData.id, initialData);
 
     if (isLoading) return <DetailsLoadingPlaceholder />;
     if (isError || !coinDetails) return <DetailsError />;

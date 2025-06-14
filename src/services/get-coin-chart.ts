@@ -7,14 +7,14 @@ export interface ICoinChart {
     total_volumes: [number, number][];
 }
 
-export interface IGetCoinChartParams {
+export interface IuseCoinChartParams {
     /** Target currency of market data (required) */
     vs_currency: string;
     /** Data up to number of days ago (required) */
     days: string;
 }
 
-const fetchCoinChart = async (id: string, params: IGetCoinChartParams): Promise<ICoinChart> => {
+const fetchCoinChart = async (id: string, params: IuseCoinChartParams): Promise<ICoinChart> => {
     try {
         const url = new URL(COIN_GECKO_API_URL + "/coins/" + id + "/market_chart");
         Object.entries(params).forEach(([key, value]) => {
@@ -29,7 +29,7 @@ const fetchCoinChart = async (id: string, params: IGetCoinChartParams): Promise<
     }
 }
 
-const getCoinChart = (id: string, params: IGetCoinChartParams, initialData?: ICoinChart) => {
+const useCoinChart = (id: string, params: IuseCoinChartParams, initialData?: ICoinChart) => {
     "use client"
     return useQuery({
         queryKey: ["coin-chart", id, params],
@@ -37,4 +37,4 @@ const getCoinChart = (id: string, params: IGetCoinChartParams, initialData?: ICo
         initialData
     })
 }
-export { getCoinChart, fetchCoinChart };
+export { useCoinChart, fetchCoinChart };

@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom'
 import { render, screen } from "@testing-library/react";
-import * as getCoinChartModule from "../../services/get-coin-chart";
+import * as useCoinChartModule from "../../services/get-coin-chart";
 import Chart from "./chart";
 
 class ResizeObserverMock {
@@ -25,7 +25,7 @@ jest.mock("recharts", () => ({
 }));
 
 jest.mock("../../services/get-coin-chart", () => ({
-    getCoinChart: jest.fn()
+    useCoinChart: jest.fn()
 }));
 
 const mockChartData = {
@@ -49,7 +49,7 @@ afterEach(() => {
 
 describe("Chart", () => {
     it("renders loading state", () => {
-        (getCoinChartModule.getCoinChart as jest.Mock).mockReturnValue({
+        (useCoinChartModule.useCoinChart as jest.Mock).mockReturnValue({
             data: undefined,
             isLoading: true,
             isError: false,
@@ -68,7 +68,7 @@ describe("Chart", () => {
     });
 
     it("renders error state", () => {
-        (getCoinChartModule.getCoinChart as jest.Mock).mockReturnValue({
+        (useCoinChartModule.useCoinChart as jest.Mock).mockReturnValue({
             data: undefined,
             isLoading: false,
             isError: true,
@@ -87,7 +87,7 @@ describe("Chart", () => {
     });
 
     it("renders chart with data", () => {
-        (getCoinChartModule.getCoinChart as jest.Mock).mockReturnValue({
+        (useCoinChartModule.useCoinChart as jest.Mock).mockReturnValue({
             data: mockChartData,
             isLoading: false,
             isError: false,
@@ -105,8 +105,8 @@ describe("Chart", () => {
         expect(screen.getByTestId("line-chart")).toBeInTheDocument();
     });
 
-    it("calls getCoinChart with correct parameters", () => {
-        (getCoinChartModule.getCoinChart as jest.Mock).mockReturnValue({
+    it("calls useCoinChart with correct parameters", () => {
+        (useCoinChartModule.useCoinChart as jest.Mock).mockReturnValue({
             data: mockChartData,
             isLoading: false,
             isError: false,
@@ -121,7 +121,7 @@ describe("Chart", () => {
             />
         );
 
-        expect(getCoinChartModule.getCoinChart).toHaveBeenCalledWith(
+        expect(useCoinChartModule.useCoinChart).toHaveBeenCalledWith(
             "bitcoin",
             { vs_currency: "usd", days: "7" }
         );

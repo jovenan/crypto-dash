@@ -1,6 +1,6 @@
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { IGetListCoinsParams } from "@/services/list-coins"
+import { IuseListCoinsParams } from "@/services/list-coins"
 import { debounce } from "@/lib/utils"
 import { useCallback } from "react"
 
@@ -13,26 +13,27 @@ const sortOptions = {
     id_desc: "Name (Z-A)"
 } as const;
 
-export default function TableFilters({ search, setSearch, sort, setSort }: { search: string, setSearch: (search: string) => void, sort: IGetListCoinsParams["order"], setSort: (sort: IGetListCoinsParams["order"]) => void }) {
-    const debouncedSetSearch = useCallback(
-        debounce((value: string) => {
-            const encodedValue = encodeURIComponent(value.trim());
-            setSearch(encodedValue);
-        }, 700),
-        [setSearch]
-    );
+const debouncedSearch = debounce((value: string, setSearch: (search: string) => void) => {
+    const encodedValue = encodeURIComponent(value.trim());
+    setSearch(encodedValue);
+}, 700);
+
+export default function TableFilters({ search, setSearch, sort, setSort }: { search: string, setSearch: (search: string) => void, sort: IuseListCoinsParams["order"], setSort: (sort: IuseListCoinsParams["order"]) => void }) {
+    const handleSearch = useCallback((value: string) => {
+        debouncedSearch(value, setSearch);
+    }, [setSearch]);
 
     return (
         <div className="flex items-center justify-between gap-4">
             <Input
                 placeholder="Search"
                 defaultValue={search}
-                onChange={(e) => debouncedSetSearch(e.target.value)}
+                onChange={(e) => handleSearch(e.target.value)}
                 className="max-w-xs"
             />
             <Select
                 value={sort}
-                onValueChange={(value) => setSort(value as IGetListCoinsParams["order"])}
+                onValueChange={(value) => setSort(value as IuseListCoinsParams["order"])}
                 defaultValue="market_cap_desc"
             >
                 <SelectTrigger className="w-[180px]">

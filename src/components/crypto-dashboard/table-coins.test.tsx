@@ -2,6 +2,7 @@ import '@testing-library/jest-dom'
 import { render, screen } from "@testing-library/react";
 import TableCoins from "./table-coins";
 import { ICoins } from "@/services/list-coins";
+import { DetailedHTMLProps, ImgHTMLAttributes } from 'react';
 
 jest.mock('next/navigation', () => ({
     useRouter: () => ({
@@ -11,7 +12,7 @@ jest.mock('next/navigation', () => ({
 
 jest.mock('next/image', () => ({
     __esModule: true,
-    default: (props: any) => <img {...props} />
+    default: (props: DetailedHTMLProps<ImgHTMLAttributes<HTMLImageElement>, HTMLImageElement>) => <img {...props} />
 }));
 
 const mockCoins: ICoins[] = [

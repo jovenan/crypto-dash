@@ -34,7 +34,7 @@ export interface ICoins {
     last_updated: string;
 }
 
-export interface IGetListCoinsParams {
+export interface IuseListCoinsParams {
     /** Target currency of coins and market data (required) */
     vs_currency: string;
     /** Sort result by field */
@@ -63,7 +63,7 @@ export interface IGetListCoinsParams {
     precision?: string;
 }
 
-const fetchListCoins = async (params: IGetListCoinsParams): Promise<ICoins[]> => {
+const fetchListCoins = async (params: IuseListCoinsParams): Promise<ICoins[]> => {
     try {
         const url = new URL(COIN_GECKO_API_URL + "/coins/markets");
         Object.entries(params).forEach(([key, value]) => {
@@ -79,7 +79,7 @@ const fetchListCoins = async (params: IGetListCoinsParams): Promise<ICoins[]> =>
     }
 }
 
-const getListCoins = (params: IGetListCoinsParams, initialData?: ICoins[]) => {
+const useListCoins = (params: IuseListCoinsParams, initialData?: ICoins[]) => {
     "use client"
     return useQuery({
         queryKey: ["list-coins", params],
@@ -87,4 +87,4 @@ const getListCoins = (params: IGetListCoinsParams, initialData?: ICoins[]) => {
         initialData
     })
 }
-export { fetchListCoins, getListCoins };
+export { fetchListCoins, useListCoins };

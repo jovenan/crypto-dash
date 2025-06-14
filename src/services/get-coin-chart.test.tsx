@@ -3,7 +3,7 @@ import { renderHook, waitFor } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import nock from "nock";
 import { COIN_GECKO_API_URL } from './constants';
-import { fetchCoinChart, getCoinChart } from "./get-coin-chart";
+import { fetchCoinChart, useCoinChart } from "./get-coin-chart";
 
 
 const mockChartData = {
@@ -33,7 +33,7 @@ describe("fetchCoinChart", () => {
     });
 });
 
-describe("getCoinChart", () => {
+describe("useCoinChart", () => {
     it("should fetch and return coin chart data", async () => {
         const queryClient = new QueryClient();
 
@@ -49,7 +49,7 @@ describe("getCoinChart", () => {
             .reply(200, mockChartData);
 
         const { result } = renderHook(
-            () => getCoinChart("bitcoin", { vs_currency: "usd", days: "7" }),
+            () => useCoinChart("bitcoin", { vs_currency: "usd", days: "7" }),
             { wrapper }
         );
 

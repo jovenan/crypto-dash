@@ -1,6 +1,6 @@
 "use client"
-import { ICoins, IGetListCoinsParams } from "@/services/list-coins";
-import { getListCoins } from "@/services/list-coins";
+import { ICoins, IuseListCoinsParams } from "@/services/list-coins";
+import { useListCoins } from "@/services/list-coins";
 import { useState } from "react";
 import TableCoins from "./table-coins";
 import TableFilters from "./table-filters";
@@ -8,11 +8,11 @@ import TablePagination from "./table-pagination";
 
 export default function Dashboard({ initialData }: { initialData: ICoins[] }) {
     const [search, setSearch] = useState("");
-    const [sort, setSort] = useState<IGetListCoinsParams["order"]>("market_cap_desc");
+    const [sort, setSort] = useState<IuseListCoinsParams["order"]>("market_cap_desc");
     const [page, setPage] = useState(1);
     const perPage = 20;
 
-    const { data: coins = [], isLoading, isError } = getListCoins({
+    const { data: coins = [], isLoading, isError } = useListCoins({
         vs_currency: "usd",
         names: search,
         order: sort,

@@ -5,11 +5,11 @@ import { SetStateAction, useCallback } from "react"
 export default function TablePagination({ page, setPage, coins, perPage }: { page: number, setPage: (value: SetStateAction<number>) => void, coins: ICoins[], perPage: number }) {
     const handlePreviousPage = useCallback(() => {
         setPage(prev => Math.max(prev - 1, 1));
-    }, []);
+    }, [setPage]);
 
     const handleNextPage = useCallback(() => {
         setPage(prev => prev + 1);
-    }, []);
+    }, [setPage]);
     return (
         <Pagination>
             <PaginationContent>

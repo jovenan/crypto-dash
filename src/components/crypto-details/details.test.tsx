@@ -2,11 +2,16 @@ import '@testing-library/jest-dom'
 import { render, screen } from "@testing-library/react";
 import * as getCoinModule from "../../services/get-coin";
 import Details, { DetailsLoadingPlaceholder, DetailsError } from "./details";
+import { ICoinDetails } from '../../services/get-coin';
 
-jest.mock("./chart", () => () => <div data-testid="chart-mock">ChartMock</div>);
+jest.mock("./chart", () => {
+    const ChartMock = () => <div data-testid="chart-mock">ChartMock</div>;
+    ChartMock.displayName = 'ChartMock';
+    return ChartMock;
+});
 
 jest.mock("../../services/get-coin", () => ({
-    getCoinDetails: jest.fn()
+    useCoinDetails: jest.fn()
 }));
 
 const mockCoinDetails = {
@@ -32,46 +37,46 @@ afterEach(() => {
 
 describe("Details", () => {
     it("renders loading placeholder", () => {
-        (getCoinModule.getCoinDetails as jest.Mock).mockReturnValue({
+        (getCoinModule.useCoinDetails as jest.Mock).mockReturnValue({
             data: undefined,
             isLoading: true,
             isError: false,
         });
 
-        render(<Details initialData={mockCoinDetails as any} />);
+        render(<Details initialData={mockCoinDetails as ICoinDetails} />);
         expect(screen.getByTestId("details-loading-placeholder")).toBeInTheDocument();
     });
 
     it("renders error state", () => {
-        (getCoinModule.getCoinDetails as jest.Mock).mockReturnValue({
+        (getCoinModule.useCoinDetails as jest.Mock).mockReturnValue({
             data: undefined,
             isLoading: false,
             isError: true,
         });
 
-        render(<Details initialData={mockCoinDetails as any} />);
+        render(<Details initialData={mockCoinDetails as ICoinDetails} />);
         expect(screen.getByText(/error loading details/i)).toBeInTheDocument();
     });
 
     it("renders coin details", () => {
-        (getCoinModule.getCoinDetails as jest.Mock).mockReturnValue({
+        (getCoinModule.useCoinDetails as jest.Mock).mockReturnValue({
             data: mockCoinDetails,
             isLoading: false,
             isError: false,
         });
 
-        render(<Details initialData={mockCoinDetails as any} />);
+        render(<Details initialData={mockCoinDetails as ICoinDetails} />);
         expect(screen.getByTestId("coin-name")).toBeInTheDocument();
     });
 
     it("renders breadcrumb", () => {
-        (getCoinModule.getCoinDetails as jest.Mock).mockReturnValue({
+        (getCoinModule.useCoinDetails as jest.Mock).mockReturnValue({
             data: mockCoinDetails,
             isLoading: false,
             isError: false,
         });
 
-        render(<Details initialData={mockCoinDetails as any} />);
+        render(<Details initialData={mockCoinDetails as ICoinDetails} />);
         expect(screen.getByTestId("breadcrumb")).toBeInTheDocument();
     });
 });

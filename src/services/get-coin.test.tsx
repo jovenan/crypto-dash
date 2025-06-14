@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom'
-import { fetchCoinDetails, getCoinDetails } from "./get-coin";
+import { fetchCoinDetails, useCoinDetails } from "./get-coin";
 import { renderHook, waitFor } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import nock from "nock";
@@ -20,7 +20,7 @@ describe("fetchCoinDetails", () => {
     })
 })
 
-describe("getCoinDetails", () => {
+describe("useCoinDetails", () => {
     it("should fetch and return coin details", async () => {
         const queryClient = new QueryClient();
 
@@ -36,7 +36,7 @@ describe("getCoinDetails", () => {
             .query(true)
             .reply(200, { id: "bitcoin", name: "Bitcoin" });
 
-        const { result } = renderHook(() => getCoinDetails("bitcoin"), { wrapper });
+        const { result } = renderHook(() => useCoinDetails("bitcoin"), { wrapper });
 
         await waitFor(() => expect(result.current.isSuccess).toBe(true));
 

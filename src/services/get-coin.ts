@@ -6,13 +6,13 @@ export interface ICoinDetails {
     symbol: string
     name: string
     web_slug: string
-    asset_platform_id: any
+    asset_platform_id: string
     platforms: {
         "": string
     }
     detail_platforms: {
         "": {
-            decimal_place: any
+            decimal_place: string
             contract_address: string
         }
     }
@@ -20,8 +20,8 @@ export interface ICoinDetails {
     hashing_algorithm: string
     categories: Array<string>
     preview_listing: boolean
-    public_notice: any
-    additional_notices: Array<any>
+    public_notice: string
+    additional_notices: Array<string>
     localization: {
         en: string
         de: string
@@ -99,17 +99,17 @@ export interface ICoinDetails {
         whitepaper: string
         blockchain_site: Array<string>
         official_forum_url: Array<string>
-        chat_url: Array<any>
-        announcement_url: Array<any>
-        snapshot_url: any
+        chat_url: Array<string>
+        announcement_url: Array<string>
+        snapshot_url: string
         twitter_screen_name: string
         facebook_username: string
-        bitcointalk_thread_identifier: any
+        bitcointalk_thread_identifier: string
         telegram_channel_identifier: string
         subreddit_url: string
         repos_url: {
             github: Array<string>
-            bitbucket: Array<any>
+            bitbucket: Array<string>
         }
     }
     image: {
@@ -189,10 +189,10 @@ export interface ICoinDetails {
             link: number
             sats: number
         }
-        total_value_locked: any
-        mcap_to_tvl_ratio: any
-        fdv_to_tvl_ratio: any
-        roi: any
+        total_value_locked: string
+        mcap_to_tvl_ratio: string
+        fdv_to_tvl_ratio: string
+        roi: string
         ath: {
             aed: number
             ars: number
@@ -1632,12 +1632,12 @@ export interface ICoinDetails {
         last_updated: string
     }
     community_data: {
-        facebook_likes: any
+        facebook_likes: string
         reddit_average_posts_48h: number
         reddit_average_comments_48h: number
         reddit_subscribers: number
         reddit_accounts_active_48h: number
-        telegram_channel_user_count: any
+        telegram_channel_user_count: string
     }
     developer_data: {
         forks: number
@@ -1652,9 +1652,9 @@ export interface ICoinDetails {
             deletions: number
         }
         commit_count_4_weeks: number
-        last_4_weeks_commit_activity_series: Array<any>
+        last_4_weeks_commit_activity_series: Array<string>
     }
-    status_updates: Array<any>
+    status_updates: Array<string>
     last_updated: string
     tickers: Array<{
         base: string
@@ -1685,7 +1685,7 @@ export interface ICoinDetails {
         is_anomaly: boolean
         is_stale: boolean
         trade_url: string
-        token_info_url: any
+        token_info_url: string
         coin_id: string
         target_coin_id?: string
     }>
@@ -1703,7 +1703,7 @@ const fetchCoinDetails = async (id: string): Promise<ICoinDetails> => {
     }
 }
 
-const getCoinDetails = (id: string, initialData?: ICoinDetails) => {
+const useCoinDetails = (id: string, initialData?: ICoinDetails) => {
     "use client"
     return useQuery({
         queryKey: ["coin-details", id],
@@ -1711,4 +1711,4 @@ const getCoinDetails = (id: string, initialData?: ICoinDetails) => {
         initialData
     })
 }
-export { getCoinDetails, fetchCoinDetails };
+export { useCoinDetails, fetchCoinDetails };

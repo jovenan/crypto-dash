@@ -1,7 +1,7 @@
 "use client";
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
 import { ChartConfig, ChartContainer } from "@/components/ui/chart";
-import { getCoinChart } from "@/services/get-coin-chart";
+import { useCoinChart } from "@/services/get-coin-chart";
 import { Skeleton } from "@/components/ui/skeleton";
 import { AlertCircle } from "lucide-react";
 
@@ -18,7 +18,7 @@ function formatXAxisLabel(timestamp: number) {
 }
 
 export default function Chart({ coinId, vsCurrency, days, config }: ChartProps) {
-    const { data, isLoading, isError } = getCoinChart(coinId, { vs_currency: vsCurrency, days });
+    const { data, isLoading, isError } = useCoinChart(coinId, { vs_currency: vsCurrency, days });
 
     if (isLoading) {
         return <Skeleton data-testid="chart-skeleton" className="h-[350px] w-full rounded-xl" />;
