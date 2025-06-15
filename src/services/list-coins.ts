@@ -72,10 +72,12 @@ const fetchListCoins = async (params: IuseListCoinsParams): Promise<ICoins[]> =>
         const response = await fetch(url.toString());
         const data = await response.json();
 
+        if (data.status?.error_code === 429) throw new Error("Rate limit exceeded");
+
         return data as ICoins[];
     } catch (error) {
         console.error(error);
-        return [] as ICoins[];
+        throw new Error("Error fetching coins");
     }
 }
 
