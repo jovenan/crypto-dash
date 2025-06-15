@@ -4,6 +4,10 @@ import * as getCoinModule from "../../services/get-coin";
 import Details, { DetailsLoading, DetailsError } from "./details";
 import { ICoinDetails } from '../../services/get-coin';
 
+jest.mock('react-error-boundary', () => ({
+    ErrorBoundary: ({ children }: { children: React.ReactNode }) => <>{children}</>,
+}));
+
 jest.mock("./chart", () => {
     const ChartMock = () => <div data-testid="chart-mock">ChartMock</div>;
     ChartMock.displayName = 'ChartMock';

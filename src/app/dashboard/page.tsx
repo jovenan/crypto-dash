@@ -17,8 +17,7 @@ export default async function Home() {
       </Suspense>
     )
   } catch (error) {
-    return (
-      <ErrorDashboard />
-    );
+    console.error(error);
+    return <ErrorDashboard />;
   }
 }

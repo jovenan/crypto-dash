@@ -14,6 +14,7 @@ export default async function CryptoPage({ params }: {
             </Suspense>
         );
     } catch (error) {
+        console.error(error);
         return <DetailsError />;
     }
 }
