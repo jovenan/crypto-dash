@@ -1,36 +1,126 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Crypto Dashboard
+
+A modern and interactive cryptocurrency dashboard built with Next.js, allowing users to track real-time prices, visualize market trends, and make informed investment decisions.
+
+![Dashboard Preview](path/to/dashboard-preview.png)
+![Coin Details Preview](path/to/coin-details-preview.png)
+
+## Features
+
+- 📊 Real-time cryptocurrency price tracking
+- 📈 Interactive price charts with historical data
+- 🔍 Advanced filtering and sorting capabilities
+- ⚡ Fast and efficient data loading
+- 🎨 Modern and clean user interface
+
+## Tech Stack
+
+- Next.js 14
+- TypeScript
+- Tailwind CSS
+- CoinGecko API
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
 
+- Node.js 18.0 or later
+- npm or yarn package manager
+
+### Installation
+
+1. Clone the repository:
+```bash
+git clone https://github.com/yourusername/crypto-dash.git
+cd crypto-dash
+```
+
+2. Install dependencies:
+```bash
+npm install
+# or
+yarn install
+```
+
+3. Run the development server:
 ```bash
 npm run dev
 # or
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+4. Open [http://localhost:3000](http://localhost:3000) in your browser to see the application.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Development Commands
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+#### Running Tests
+```bash
+# Run all tests
+npm test
+# or
+yarn test
 
-## Learn More
+# Run tests in watch mode
+npm run test:watch
+# or
+yarn test:watch
+```
 
-To learn more about Next.js, take a look at the following resources:
+#### Linting
+```bash
+# Run ESLint to check for code issues
+npm run lint
+# or
+yarn lint
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Project Structure
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```
+src/
+├── app/                    # Next.js app directory
+│   ├── page.tsx           # Home page
+│   ├── dashboard/         # Dashboard page
+│   └── crypto/[id]/       # Individual coin details page
+├── components/            # React components
+│   ├── crypto-dashboard/  # Dashboard related components
+│   ├── crypto-details/    # Coin details components
+│   ├── ui/               # Reusable UI components
+│   └── common/           # Common components
+├── services/             # API services
+│   ├── list-coins.ts     # Coin listing service
+│   ├── get-coin.ts       # Individual coin service
+│   └── get-coin-chart.ts # Chart data service
+└── lib/                  # Utility functions
+    └── utils.ts          # Helper functions
+```
 
-## Deploy on Vercel
+## Contributing
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+We welcome contributions to improve the Crypto Dashboard! Here's how you can help:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. Fork the repository
+2. Create a new branch (`git checkout -b feature/amazing-feature`)
+3. Make your changes
+4. Commit your changes (`git commit -m 'Add some amazing feature'`)
+5. Push to the branch (`git push origin feature/amazing-feature`)
+6. Open a Pull Request
+
+### Development Guidelines
+
+- Follow the existing code style and structure
+- Write meaningful commit messages
+- Add tests for new features
+- Update documentation as needed
+- Ensure all tests pass before submitting a PR
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Acknowledgments
+
+- [CoinGecko API](https://www.coingecko.com/en/api) for providing cryptocurrency data
+- [Next.js](https://nextjs.org/) for the React framework
+- [Tailwind CSS](https://tailwindcss.com/) for styling
+- [Recharts](https://recharts.org/) for chart components
