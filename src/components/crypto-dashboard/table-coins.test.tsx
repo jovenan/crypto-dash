@@ -83,21 +83,8 @@ const mockCoins: ICoins[] = [
 ];
 
 describe("TableCoins", () => {
-    it("renders loading state", () => {
-        render(<TableCoins coins={[]} isLoading={true} isError={false} />);
-
-        expect(screen.getByTestId("loading-table")).toBeInTheDocument();
-    });
-
-    it("renders error state", () => {
-        render(<TableCoins coins={[]} isLoading={false} isError={true} />);
-
-        expect(screen.getByText(/failed to load data/i)).toBeInTheDocument();
-        expect(screen.getByText(/please try again later/i)).toBeInTheDocument();
-    });
-
     it("renders table with data", () => {
-        render(<TableCoins coins={mockCoins} isLoading={false} isError={false} />);
+        render(<TableCoins coins={mockCoins} />);
 
         expect(screen.getByText("Rank")).toBeInTheDocument();
         expect(screen.getByText("Name")).toBeInTheDocument();
@@ -117,7 +104,7 @@ describe("TableCoins", () => {
     });
 
     it("renders formatted currency values", () => {
-        render(<TableCoins coins={mockCoins} isLoading={false} isError={false} />);
+        render(<TableCoins coins={mockCoins} />);
 
         expect(screen.getByText("$50,000.00")).toBeInTheDocument();
         expect(screen.getByText("$3,000.00")).toBeInTheDocument();

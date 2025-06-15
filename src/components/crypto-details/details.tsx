@@ -14,11 +14,23 @@ import {
 } from "@/components/ui/breadcrumb";
 import Link from "next/link";
 import Chart from "./chart";
+import { ErrorBoundary } from "react-error-boundary";
+import { Suspense } from "react";
 
 export default function Details({ initialData }: { initialData: ICoinDetails }) {
+    return (
+        <ErrorBoundary fallbackRender={() => <DetailsError />}>
+            <Suspense fallback={<DetailsLoading />}>
+                <DetailsLayout initialData={initialData} />
+            </Suspense>
+        </ErrorBoundary>
+    )
+}
+
+function DetailsLayout({ initialData }: { initialData: ICoinDetails }) {
     const { data: coinDetails, isLoading, isError } = useCoinDetails(initialData.id, initialData);
 
-    if (isLoading) return <DetailsLoadingPlaceholder />;
+    if (isLoading) return <DetailsLoading />;
     if (isError || !coinDetails) return <DetailsError />;
 
     return (
@@ -84,10 +96,9 @@ export default function Details({ initialData }: { initialData: ICoinDetails }) 
     );
 }
 
-export function DetailsLoadingPlaceholder() {
+export function DetailsLoading() {
     return (
         <div data-testid="details-loading-placeholder" className="max-w-7xl mx-auto p-6 space-y-8">
-            {/* Header */}
             <div className="flex items-center gap-4">
                 <Skeleton className="h-12 w-12 rounded-full" />
                 <div className="space-y-2">

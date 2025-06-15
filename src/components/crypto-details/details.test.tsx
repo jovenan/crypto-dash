@@ -1,8 +1,12 @@
 import '@testing-library/jest-dom'
 import { render, screen } from "@testing-library/react";
 import * as getCoinModule from "../../services/get-coin";
-import Details, { DetailsLoadingPlaceholder, DetailsError } from "./details";
+import Details, { DetailsLoading, DetailsError } from "./details";
 import { ICoinDetails } from '../../services/get-coin';
+
+jest.mock('react-error-boundary', () => ({
+    ErrorBoundary: ({ children }: { children: React.ReactNode }) => <>{children}</>,
+}));
 
 jest.mock("./chart", () => {
     const ChartMock = () => <div data-testid="chart-mock">ChartMock</div>;
@@ -81,9 +85,9 @@ describe("Details", () => {
     });
 });
 
-describe("DetailsLoadingPlaceholder", () => {
+describe("DetailsLoading", () => {
     it("renders skeletons", () => {
-        render(<DetailsLoadingPlaceholder />);
+        render(<DetailsLoading />);
         expect(screen.getByTestId("details-loading-placeholder")).toBeInTheDocument();
     });
 });

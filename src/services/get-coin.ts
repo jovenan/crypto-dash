@@ -1696,10 +1696,12 @@ const fetchCoinDetails = async (id: string): Promise<ICoinDetails> => {
         const url = new URL(COIN_GECKO_API_URL + "/coins/" + id);
         const response = await fetch(url.toString());
         const data = await response.json();
+        if (data.status?.error_code === 429) throw new Error("Rate limit exceeded");
+
         return data as ICoinDetails;
     } catch (error) {
         console.error(error);
-        return {} as ICoinDetails;
+        throw new Error("Error fetching coin details");
     }
 }
 
