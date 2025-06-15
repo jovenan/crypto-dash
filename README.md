@@ -2,8 +2,10 @@
 
 A modern and interactive cryptocurrency dashboard built with Next.js, allowing users to track real-time prices, visualize market trends, and make informed investment decisions.
 
-![Dashboard Preview](path/to/dashboard-preview.png)
-![Coin Details Preview](path/to/coin-details-preview.png)
+![image](https://github.com/user-attachments/assets/e020cfb5-0fdb-45cf-867b-61097411ea24)
+![image](https://github.com/user-attachments/assets/e5a5c57c-b4c8-4ae1-ba8a-b7cad77b1642)
+![image](https://github.com/user-attachments/assets/b0d873d2-040f-4779-8256-1fa44fe3f84b)
+
 
 ## Features
 
